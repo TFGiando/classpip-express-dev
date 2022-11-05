@@ -52,9 +52,12 @@ export class JuegoVotacionRapidaPage implements OnInit {
 
    // Esta función se ejecuta cuando movemos a los conceptos de sitio
    reorderItems(event) {
-    const itemMove = this.juegoSeleccionado.conceptos.splice(event.detail.from, 1)[0];
-    this.juegoSeleccionado.conceptos.splice(event.detail.to, 0, itemMove);
-    event.detail.complete();
+    if(event.cancelable){
+      event.preventDefault();
+      const itemMove = this.juegoSeleccionado.conceptos.splice(event.detail.from, 1)[0];
+      this.juegoSeleccionado.conceptos.splice(event.detail.to, 0, itemMove);
+      event.detail.complete();
+    }
  }
 
  Incrementar(i) {
