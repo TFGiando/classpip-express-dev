@@ -24,7 +24,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as URL from './URLs/urls';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 //const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 // const config: SocketIoConfig = { url: 'http://147.83.118.92:8080', options: {} };
@@ -44,8 +43,7 @@ import { LongPressModule } from 'ionic-long-press';
 import { IonicGestureConfig } from '../ionicGestureConfig';
 import { WheelSelector } from '@ionic-native/wheel-selector/ngx';
 
-import { DateAdapter } from '@angular/material/core';
-import { CustomDateAdapter } from './customDataAdapter';
+
 import {DatePipe} from '@angular/common';
 
 @NgModule({
@@ -73,12 +71,10 @@ import {DatePipe} from '@angular/common';
     SplashScreen,
 
     WheelSelector,
-    LocalNotifications,
     DatePipe,
     Media,
     {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    {provide: DateAdapter, useClass: CustomDateAdapter}
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent]
 })
