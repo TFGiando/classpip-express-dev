@@ -73,16 +73,16 @@
               <ion-item lines = "none" style = "width: 90%; margin-left: 10%;">
                 <ion-item lines = "none">
                   <p style="font-size: 15px;">Verdadero</p> 
-                  <ion-radio slot="start"  value="0" checked="{{seleccion[i][0]}}"
+                  <ion-radio slot="start"  value="0" checked="true"
                     color="primary"></ion-radio>
                 </ion-item>
                 <ion-item lines = "none">
                   <p style="font-size: 15px;">Falso</p> 
-                  <ion-radio slot="start"  value="1" checked="{{seleccion[i][1]}}"
+                  <ion-radio slot="start"  value="1" checked="true"
                     color="primary"></ion-radio>
                 </ion-item>
               </ion-item>
-
+                                              <!-- donde pone true ponia: {{seleccion[i][0]}} ; {{seleccion[i][1]}} respectivamente -->
         
             </ion-radio-group>
         
@@ -97,12 +97,12 @@
           <ion-radio-group allow-empty-selection="true" name="radio-group" #radioGroup2 (ionChange) = "radioGroupChange($event, i)">
               <ion-item *ngFor="let respuesta of item.respuestas; let j = index"  (ionChange)="radioSelect($event, i, j)">
                 <p style="font-size: 15px;">{{respuesta}}</p> 
-                <ion-radio slot="start" value="{{j}}" checked="{{seleccion[i][j]}}"
+                <ion-radio slot="start" value="{{j}}" checked="true"
                   color="primary"></ion-radio>
               </ion-item>
           </ion-radio-group>
 
-          <!--hay un error en los checked="{{seleccion[i][j]}}, si pones = "true" funcionan bien-->
+          <!-- en el checked=true antes ponia checked="{{seleccion[i][j]}} -->
 
         </div>
          
