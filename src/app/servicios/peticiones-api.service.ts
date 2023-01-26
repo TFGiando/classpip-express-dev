@@ -31,7 +31,7 @@ export class PeticionesAPIService {
   private APIUrlCuestionarioSatisfaccion = this.base + '3000/api/cuestionariosSatisfaccion';
   private APIUrlJuegoDeEncuestaRapida =  this.base + '3000/api/juegosDeEncuestaRapida';
   private APIUrlJuegoDeVotacionRapida = this.base + '3000/api/juegosDeVotacionRapida';
-  private APIUrlJuegoDeCuestionarioRapido = this.base + '3000/api/juegosDeCuestionarioRapido';
+  private APIUrlJuegoDeCuestionarioRapido = this.base + '3001/api/v2/juegoCuestionarioRapido';
   private APIUrlJuegoDeCuestionario = this.base + '3000/api/JuegosDeCuestionario';
   private APIUrlJuegoDeCogerTurnoRapido = this.base + '3000/api/juegosDeCogerTurnoRapido';
 
@@ -94,7 +94,7 @@ export class PeticionesAPIService {
   
 
   // OBTENEMOS LAS PREGUNTAS DEL CUESTIONARIO SELECCIONADO
-  public DamePreguntasCuestionario(cuestionarioId: number): Observable<Pregunta[]> {
+  public DamePreguntasCuestionario(cuestionarioId: number): Observable<Pregunta[]> {//AQUI DEBO HACER EL CAMBIO
 
     const preguntasObservable: Observable<Pregunta[]> = new Observable((obs) => {
       return this.http.get<any[]>(this.APIUrlCuestionario + '/' + cuestionarioId + '/Preguntas')
@@ -325,14 +325,13 @@ export class PeticionesAPIService {
 
 public  DameJuegoDeCuestionarioRapido(clave: string): Observable<any> {
   const juegoObservable: Observable<any> = new Observable( obs => {
-    this.http.get<any>(this.APIUrlJuegoDeCuestionarioRapido
-      + '?filter[where][Clave]=' + clave)
+    this.http.get<any>(this.APIUrlJuegoDeCuestionarioRapido + "/clave/" + clave)
     .subscribe (res => {
       let juegoArreglado;
       if (res.length === 0) {
         juegoArreglado = undefined;
       } else {
-        const juego = res[0];
+        const juego = res;
         console.log ('este es el juego que ha llegado **^**' , juego);
         juegoArreglado = {
           id: juego.id,
@@ -359,15 +358,6 @@ public  DameJuegoDeCuestionarioRapido(clave: string): Observable<any> {
 }
 
 
-
-
-public ModificarJuegoDeCuestionarioRapidoo( juego: any): Observable<any> {
-  // tslint:disable-next-line:max-line-length
-    return this.http.put<any>(this.APIUrlJuegoDeCuestionarioRapido, juego);
-}
-
-
-
 public ModificarJuegoDeCuestionarioRapido( juego: any): Observable<any> {
   const juegoArreglado = {
     id: juego.id,
@@ -387,7 +377,7 @@ public ModificarJuegoDeCuestionarioRapido( juego: any): Observable<any> {
   };
 
   // tslint:disable-next-line:max-line-length
-  return this.http.put<any>(this.APIUrlJuegoDeCuestionarioRapido, juegoArreglado);
+  return this.http.put<any>(this.APIUrlJuegoDeCuestionarioRapido + "/", juegoArreglado);
 }
 
 
