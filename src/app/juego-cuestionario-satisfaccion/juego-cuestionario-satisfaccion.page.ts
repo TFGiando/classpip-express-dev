@@ -189,11 +189,10 @@ export class JuegoCuestionarioSatisfaccionPage implements OnInit {
     this.peticionesAPI.DameJuegoDeEncuestaRapida (this.juegoSeleccionado.clave)
     .subscribe ( juego => {
       console.log ('recupero juego');
-      console.log (juego[0]);
-      juego[0].respuestas.push (this.inscripcionAlumnoJuegoDeCuestionarioSatisfaccion);
+      console.log (juego);
+      juego.respuestas.push (this.inscripcionAlumnoJuegoDeCuestionarioSatisfaccion);
       console.log ('voy a modificar el juego ');
-      console.log (juego[0]);
-      this.peticionesAPI.ModificarJuegoDeEncuestaRapida (juego[0]).subscribe();
+      this.peticionesAPI.ModificarJuegoDeEncuestaRapida (juego).subscribe();
     });
   
     const confirm = await this.alertCtrl.create({

@@ -29,7 +29,7 @@ export class PeticionesAPIService {
   private APIUrlRespuestasJuegoDeCuestionario = this.base + '3000/api/respuestasJuegoDeCuestionario';
   private APIUrlAlumnoJuegoDeCuestionarioSatisfaccion = this.base + '3000/api/alumnosJuegoDeCuestionarioSatisfaccion';
   private APIUrlCuestionarioSatisfaccion = this.base + '3000/api/cuestionariosSatisfaccion';
-  private APIUrlJuegoDeEncuestaRapida =  this.base + '3000/api/juegosDeEncuestaRapida';
+  private APIUrlJuegoDeEncuestaRapida =  this.base + '3001/api/v2/juegoEncuestaRapida';
   private APIUrlJuegoDeVotacionRapida = this.base + '3000/api/juegosDeVotacionRapida';
   private APIUrlJuegoDeCuestionarioRapido = this.base + '3001/api/v2/juegoCuestionarioRapido';
   private APIUrlJuegoDeCuestionario = this.base + '3000/api/JuegosDeCuestionario';
@@ -405,14 +405,15 @@ public ModificarJuegoDeCuestionarioRapido( juego: any): Observable<any> {
   
   public  DameJuegoDeEncuestaRapida(clave: string): Observable<any> {
     const juegoObservable: Observable<any> = new Observable( obs => {
-      this.http.get<any>(this.APIUrlJuegoDeEncuestaRapida
-        + '?filter[where][Clave]=' + clave)
+
+      this.http.get<any>(this.APIUrlJuegoDeEncuestaRapida + "/clave/" + clave)
       .subscribe (res => {
+        console.log(res)
         let juegoArreglado;
         if (res.length === 0) {
           juegoArreglado = undefined;
         } else {
-          const juego = res[0];
+          const juego = res;
           console.log ('este es el juego que ha llegado **^**' , juego);
           juegoArreglado = {
             id: juego.id,
@@ -450,7 +451,7 @@ public ModificarJuegoDeCuestionarioRapido( juego: any): Observable<any> {
     };
 
     // tslint:disable-next-line:max-line-length
-    return this.http.put<JuegoDeEncuestaRapida>(this.APIUrlJuegoDeEncuestaRapida, juegoArreglado);
+    return this.http.put<JuegoDeEncuestaRapida>(this.APIUrlJuegoDeEncuestaRapida + '/', juegoArreglado);
   }
 
 }
