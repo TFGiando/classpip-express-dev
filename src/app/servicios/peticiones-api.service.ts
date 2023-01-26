@@ -33,21 +33,21 @@ export class PeticionesAPIService {
   private APIUrlJuegoDeVotacionRapida = this.base + '3000/api/juegosDeVotacionRapida';
   private APIUrlJuegoDeCuestionarioRapido = this.base + '3001/api/v2/juegoCuestionarioRapido';
   private APIUrlJuegoDeCuestionario = this.base + '3000/api/JuegosDeCuestionario';
-  private APIUrlJuegoDeCogerTurnoRapido = this.base + '3000/api/juegosDeCogerTurnoRapido';
+  private APIUrlJuegoDeCogerTurnoRapido = this.base + '3001/api/v2/juegoCogerTurnoRapido';
 
   constructor(
     private http: HttpClient,
   ) { }
 
   public DameJuegoDeCogerTurnoRapidoo (clave: string): Observable<any> {
-    return this.http.get<any>(this.APIUrlJuegoDeCogerTurnoRapido
-    + '?filter[where][Clave]=' + clave);
+    return this.http.get<any>(this.APIUrlJuegoDeCogerTurnoRapido + '/clave/'
+     + clave);
   }
   
   public  DameJuegoDeCogerTurnoRapido (clave: string): Observable<any> {
       const juegoObservable: Observable<any> = new Observable( obs => {
         this.http.get<any>(this.APIUrlJuegoDeCogerTurnoRapido
-          + '?filter[where][Clave]=' + clave)    
+          + '/clave/' + clave)    
       .subscribe (res => {
         let juegoArreglado;
         if (res.length === 0) {
@@ -271,6 +271,8 @@ export class PeticionesAPIService {
       this.http.get<any>(this.APIUrlJuegoDeVotacionRapida
         + '?filter[where][Clave]=' + clave)
       .subscribe (res => {
+        console.log('en la url');
+        console.log(clave)
         let juegoArreglado;
         if (res.length === 0) {
           juegoArreglado = undefined;
